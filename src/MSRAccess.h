@@ -68,7 +68,7 @@ bool readMSRAllCores(uint32_t reg, uint64_t* buf) {
 int readMSRs(uint32_t* list, uint64_t* output, uint32_t count) {
 	DWORD length, err=0;
 
-	if (DeviceIoControl(glDriverInterface, 0x22e002, list, (count + 2) * 4, output, (count + 2) * 8, (LPDWORD)&length, (LPOVERLAPPED)0x0)) {
+	if (DeviceIoControl(glMSRDriverInterface, IOCTL_READMULTIPLEMSRS, list, (count + 2) * 4, output, (count + 2) * 8, (LPDWORD)&length, (LPOVERLAPPED)0x0)) {
 		return err;
 	}
 	else {
